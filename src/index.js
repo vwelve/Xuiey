@@ -2,7 +2,7 @@ const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
 const { Client, Intents, Collection } = require('discord.js');
 const { readdirSync } = require("fs");
-const { CLIENT_ID, GUILD_ID, DISCORD_TOKEN } = require("./config");
+const { CLIENT_ID, GUILD_ID, DISCORD_TOKEN, SELLIX_TOKEN } = require("./config");
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
 const interactions = new Map();
@@ -45,9 +45,9 @@ client.on('ready', async () => {
   
 client.on('interactionCreate', async interaction => {
     if (!interaction.isCommand()) return;
-    
+
     let cmd = interactions.get(interaction.commandName);
-    cmd(interaction);
+    cmd(interaction, SELLIX_TOKENx);
 });
   
 client.login(DISCORD_TOKEN);
